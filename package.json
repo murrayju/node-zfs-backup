@@ -1,0 +1,29 @@
+{
+    "name": "node-zfs-backup",
+    "version": "1.0.0",
+    "description": "A node application for replicating zfs snapshots to a remote machine",
+    "main": "index.js",
+    "dependencies": {
+        "q": "^1.4.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/murrayju/node-zfs-backup.git"
+    },
+    "keywords": [
+        "node",
+        "zfs",
+        "backup",
+        "snapshots"
+    ],
+    "author": "Justin Murray <murrayju@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/murrayju/node-zfs-backup/issues"
+    },
+    "homepage": "https://github.com/murrayju/node-zfs-backup#readme"
+}

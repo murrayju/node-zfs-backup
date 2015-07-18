@@ -1,0 +1,9 @@
+{
+    "tag": "zfs-auto-snap_daily",
+    "prop": "murrayju:backuptarget",
+    "remote": {
+        "host": "drscm.r3.corp.local",
+        "port": 22,
+        "pool": "tank"
+    }
+}
