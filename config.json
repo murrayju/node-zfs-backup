@@ -1,5 +1,5 @@
 {
-    "tag": "zfs-auto-snap_daily",
+    "tag": "zfs-auto-snap_hourly",
     "prop": "murrayju:backuptarget",
     "remote": {
         "host": "drscm.r3.corp.local",

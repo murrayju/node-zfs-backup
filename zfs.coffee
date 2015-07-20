@@ -62,7 +62,7 @@ findFirstDaily = (snaps) ->
   for snap in snaps
     return snap if regex.test(snap)
 
-doBackup = (ds, type, baseSnap, targetSnap) ->
+doSendRecv = (ds, type, baseSnap, targetSnap) ->
   console.log("dataset: #{ds}, base: #{baseSnap}, new: #{targetSnap}")
   if baseSnap == targetSnap
     console.log "Remote server already up to date"
@@ -81,22 +81,22 @@ doBackup = (ds, type, baseSnap, targetSnap) ->
       return deferCmd(cmd).spread (stdout, stderr) ->
         console.log stdout
 
-
-# just test code
-getDatasets()
-  .then (datasets) ->
-    for ds,type of datasets
+doBackup = () ->
+  return getDatasets().then (datasets) ->
+    promises = []
+    for ds, type of datasets
       do (ds) ->
-        q.all([
+        promises.push q.all([
           getSnapshots(ds, false)
           getSnapshots(ds, true)
-        ])
-          .spread (localSnaps, remoteSnaps) ->
-            baseSnap = findFirstCommon(remoteSnaps, localSnaps)
-            targetSnap = findFirstDaily(localSnaps)
-            return doBackup(ds, type, baseSnap, targetSnap)
-          .catch (err) ->
-            console.log "error: #{err}"
-  .catch (err) ->
-    console.log "error: #{err}"
+        ]).spread (localSnaps, remoteSnaps) ->
+          baseSnap = findFirstCommon(remoteSnaps, localSnaps)
+          targetSnap = findFirstDaily(localSnaps)
+          return doSendRecv(ds, type, baseSnap, targetSnap)
+    return q.all(promises)
+
+
+# test it
+doBackup().catch (err) ->
+  console.log "error: #{err}"
 
