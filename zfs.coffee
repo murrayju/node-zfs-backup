@@ -95,8 +95,7 @@ doBackup = () ->
           return doSendRecv(ds, type, baseSnap, targetSnap)
     return q.all(promises)
 
-
-# test it
-doBackup().catch (err) ->
-  console.log "error: #{err}"
+# Export public fns
+module.exports =
+  doBackup: doBackup
 
