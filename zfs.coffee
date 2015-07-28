@@ -83,17 +83,17 @@ doSendRecv = (ds, type, baseSnap, targetSnap) ->
 
 doBackup = () ->
   return getDatasets().then (datasets) ->
-    promises = []
+    promiseChain = q.when(true);
     for ds, type of datasets
       do (ds) ->
-        promises.push q.all([
+        promiseChain = promiseChain.then -> q.all([
           getSnapshots(ds, false)
           getSnapshots(ds, true)
         ]).spread (localSnaps, remoteSnaps) ->
           baseSnap = findFirstCommon(remoteSnaps, localSnaps)
           targetSnap = findFirstDaily(localSnaps)
           return doSendRecv(ds, type, baseSnap, targetSnap)
-    return q.all(promises)
+    return promiseChain
 
 # Export public fns
 module.exports =
