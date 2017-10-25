@@ -4,7 +4,8 @@
     "description": "A node application for replicating zfs snapshots to a remote machine",
     "main": "index.js",
     "dependencies": {
-        "q": "^1.4.1"
+        "q": "^1.4.1",
+        "lodash": "*"
     },
     "devDependencies": {},
     "scripts": {

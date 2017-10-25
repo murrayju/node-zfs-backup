@@ -2,8 +2,8 @@
     "tag": "zfs-auto-snap_hourly",
     "prop": "murrayju:backuptarget",
     "remote": {
-        "host": "drscm.r3.corp.local",
-        "port": 22,
+        "host": "thegibson.pw",
+        "port": 55587,
         "pool": "tank"
     }
 }
